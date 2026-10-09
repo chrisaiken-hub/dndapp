@@ -29,7 +29,7 @@ async function openThread(id){
 function newThread(ppl){
  const p=ppl.filter(x=>x.id!==S.user.id).map(x=>`<label class="chk"><input type="radio" name="to" value="${x.id}" required> ${esc(x.display_name)}</label>`).join("");
  const d=document.createElement("div");d.className="dlg";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");
- d.innerHTML=`<div class="dlg-box"><h3>New conversation</h3><form id="nf"><fieldset><legend>Who?</legend>${p}</fieldset><label><input type="radio" name="to" value="party"> Everyone</label>
+ d.innerHTML=`<div class="dlg-box"><h3>New conversation</h3><form id="nf"><fieldset><legend>Who?</legend>${p}<label class="chk"><input type="radio" name="to" value="party" required> Everyone</label></fieldset>
  <p class="err" id="ne" role="alert"></p><div class="tr"><button>Create</button><button type="button" class="cancel">Cancel</button></div></form></div>`;
  document.body.appendChild(d);d.querySelector(".cancel").onclick=()=>d.remove();
  document.getElementById("nf").onsubmit=async e=>{e.preventDefault();const to=document.querySelector("[name=to]:checked").value;
