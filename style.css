@@ -59,11 +59,17 @@ body{margin:0;background:var(--ink);color:var(--bone);font:18px/1.6 "Spectral",G
  100%{opacity:0;transform:translate(80vw,2vh) scale(.9)}
 }
 
-h1,h2,h3{font-family:"IM Fell English",Georgia,serif;font-weight:400;margin:0}
+h1,h2,h3{font-weight:400;margin:0}
+h3{font-family:"IM Fell English",Georgia,serif}
+h1,h2{font-family:"Pirata One","IM Fell English",Georgia,serif;letter-spacing:.015em}
 :focus-visible{outline:3px solid var(--wine);outline-offset:2px}
 .skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:var(--bone);color:var(--ink);padding:6px 10px;z-index:100}
 header{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:24px 20px 8px;display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap}
-header h1{font-size:clamp(28px,4.5vw,44px)}header p{margin:0;color:var(--dim);font-style:italic}
+header h1{font-size:clamp(30px,4.8vw,48px);position:relative;display:inline-block;padding-bottom:10px;
+ text-shadow:0 0 18px rgba(156,47,47,.35),0 0 38px rgba(156,47,47,.15)}
+header h1::after{content:"";position:absolute;left:1px;bottom:0;height:2px;width:46%;
+ background:linear-gradient(90deg,var(--wine),transparent)}
+header p{margin:0;color:var(--dim);font-style:italic}
 main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:16px 20px 60px}
 
 /* every view function just replaces #main's innerHTML; motion.js re-triggers this on each swap */
