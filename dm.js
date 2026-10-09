@@ -77,5 +77,6 @@ async function initExtras(){
  sb.channel("extras")
   .on("postgres_changes",{event:"*",schema:"public",table:"scenes"},pl=>{const r=pl.new;if(r?.active)showScene(r);else closeScene()})
   .on("postgres_changes",{event:"*",schema:"public",table:"posts"},()=>{if(S.view==="journal"&&idle())journal()})
-  .on("postgres_changes",{event:"*",schema:"public",table:"quests"},()=>{if(S.view==="quests"&&idle())quests()}).subscribe();
+  .on("postgres_changes",{event:"*",schema:"public",table:"quests"},()=>{if(S.view==="quests"&&idle())quests()})
+  .on("postgres_changes",{event:"INSERT",schema:"public",table:"messages"},()=>{if(S.view==="msg"&&idle())messaging()}).subscribe();
 }
