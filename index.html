@@ -6,6 +6,29 @@
 <link rel="stylesheet" href="style.css">
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
+
+<div class="env" aria-hidden="true">
+ <div class="sky"></div>
+ <div class="moon"></div>
+ <div class="cloud c1"></div>
+ <div class="cloud c2"></div>
+ <div class="fogL fog1"></div>
+ <div class="fogL fog2"></div>
+ <div class="fogL fog3"></div>
+ <div class="skyline">
+  <svg viewBox="0 0 400 90" preserveAspectRatio="none"><path d="M0 90V54l10-6 6 4 8-10 4 6 10-14 6 10 4-4 8 8 2-20 6 4V8l4-8 4 8v10l10 6 2-10 6 2 4 16 8-2 4-10 6 4 2 14 10-4 4 6 12-2 2-18 5-2V2l5 4 1 16 6 2 4-8 8 2 2 10 10-2 4-14 6 4 2 12 8-2V8l4-6 4 10v8l12 4 2-8 6 2 2 14 10 4V90Z" fill="#06060a"/></svg>
+  <div class="window"></div>
+ </div>
+ <div class="raven" aria-hidden="true"><svg><use href="#raven-shape"/></svg></div>
+</div>
+<svg width="0" height="0" style="position:absolute">
+ <symbol id="raven-shape" viewBox="0 0 34 34">
+  <g class="wing l"><path d="M17 17c-4-3-9-4-14-2 4 1 8 3 11 6 1-1 2-2 3-4Z" fill="#4a453d"/></g>
+  <g class="wing r"><path d="M17 17c4-3 9-4 14-2-4 1-8 3-11 6-1-1-2-2-3-4Z" fill="#4a453d"/></g>
+  <ellipse cx="17" cy="17" rx="3.2" ry="2" fill="#4a453d"/>
+ </symbol>
+</svg>
+
 <header><div><h1>Curse of Strahd</h1><p>Party companion. Working title.</p></div><div id="who"></div></header>
 <main id="main" tabindex="-1"></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
