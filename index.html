@@ -29,6 +29,67 @@
  </symbol>
 </svg>
 
+<div class="gate-stage" id="gateStage" data-state="gate">
+ <div class="gate-scene" aria-hidden="true">
+  <div class="leaf left">
+   <svg viewBox="0 0 220 700" preserveAspectRatio="xMaxYMid slice">
+    <defs><linearGradient id="iron" x1="0" y1="0" x2="1" y2="0">
+     <stop offset="0" stop-color="#030304"/><stop offset=".5" stop-color="#0c0b0d"/><stop offset="1" stop-color="#030304"/>
+    </linearGradient></defs>
+    <rect x="195" y="0" width="25" height="700" fill="url(#iron)"/>
+    <path d="M195 0h25v700h-25 Z" fill="none" stroke="rgba(216,212,194,.08)" stroke-width="1"/>
+    <g fill="url(#iron)">
+      <path d="M20 90 10 40 0 90v610h20Z"/>
+      <path d="M62 90 52 40 42 90v610h20Z"/>
+      <path d="M104 90 94 40 84 90v610h20Z"/>
+      <path d="M146 90 136 40 126 90v610h20Z"/>
+      <path d="M188 90 178 40 168 90v610h20Z"/>
+    </g>
+    <rect x="0" y="150" width="210" height="16" fill="url(#iron)"/>
+    <rect x="0" y="420" width="210" height="16" fill="url(#iron)"/>
+    <path d="M210 300a60 60 0 0 0 0 120 Z" fill="url(#iron)" stroke="rgba(216,212,194,.12)" stroke-width="1.5"/>
+    <circle cx="192" cy="360" r="7" fill="#1b1416" stroke="rgba(216,212,194,.18)" stroke-width="1"/>
+   </svg>
+  </div>
+  <div class="leaf right">
+   <svg viewBox="0 0 220 700" preserveAspectRatio="xMaxYMid slice">
+    <rect x="195" y="0" width="25" height="700" fill="url(#iron)"/>
+    <path d="M195 0h25v700h-25 Z" fill="none" stroke="rgba(216,212,194,.08)" stroke-width="1"/>
+    <g fill="url(#iron)">
+      <path d="M20 90 10 40 0 90v610h20Z"/>
+      <path d="M62 90 52 40 42 90v610h20Z"/>
+      <path d="M104 90 94 40 84 90v610h20Z"/>
+      <path d="M146 90 136 40 126 90v610h20Z"/>
+      <path d="M188 90 178 40 168 90v610h20Z"/>
+    </g>
+    <rect x="0" y="150" width="210" height="16" fill="url(#iron)"/>
+    <rect x="0" y="420" width="210" height="16" fill="url(#iron)"/>
+    <path d="M210 300a60 60 0 0 1 0 120 Z" fill="url(#iron)" stroke="rgba(216,212,194,.12)" stroke-width="1.5"/>
+   </svg>
+  </div>
+ </div>
+ <div class="gate-title">
+  <div class="inner">
+   <h1>Curse of Strahd</h1>
+   <p>The mists remember every name that enters.</p>
+   <button id="enterBtn" type="button">Enter Barovia</button>
+  </div>
+ </div>
+ <div class="login-scene">
+  <form class="box login" id="lf">
+   <h2>Present Yourself</h2>
+   <p class="sub">The gate will not open for strangers.</p>
+   <label for="em">Email</label>
+   <input id="em" type="email" autocomplete="username" required>
+   <label for="pw">Password</label>
+   <input id="pw" type="password" autocomplete="current-password" required>
+   <p class="err" id="loginErr" role="alert"></p>
+   <button>Sign in</button>
+  </form>
+ </div>
+ <div class="burst" aria-hidden="true"></div>
+</div>
+
 <header><div><h1>Curse of Strahd</h1><p>Party companion. Working title.</p></div><div id="who"></div></header>
 <main id="main" tabindex="-1"></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>

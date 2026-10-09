@@ -9,26 +9,39 @@ const canEdit=c=>S.role==="dm"||c.owner===S.user.id;
 const table=(head,rows)=>`<table><thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
 const pre=t=>`<p class="pre">${esc(t)}</p>`;
 
-function login(msg=""){
- $who.innerHTML="";
- $main.innerHTML=`<form class="box login" id="lf"><h2>Enter Barovia</h2><label for="em">Email</label><input id="em" type="email" autocomplete="username" required><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required><p class="err" role="alert">${esc(msg)}</p><button>Sign in</button></form>`;
- document.getElementById("lf").onsubmit=async e=>{e.preventDefault();
-  const {error}=await sb.auth.signInWithPassword({email:em.value.trim(),password:pw.value});
-  if(error)login("Could not sign in. Check your email and password.");else start()};
-}
-async function start(){
+const $gate=document.getElementById("gateStage"),$lf=document.getElementById("lf"),$loginErr=document.getElementById("loginErr");
+const gateState=s=>{if($gate)$gate.dataset.state=s};
+
+function showGate(){$who.innerHTML="";if($loginErr)$loginErr.textContent="";gateState("gate")}
+function loginError(msg){$loginErr.textContent=msg;gateState("login")}
+
+document.getElementById("enterBtn").onclick=()=>gateState("login");
+$lf.onsubmit=async e=>{e.preventDefault();
+ const {error}=await sb.auth.signInWithPassword({email:em.value.trim(),password:pw.value});
+ if(error)return loginError("Could not sign in. Check your email and password.");
+ gateState("opening");
+ await Promise.all([enterApp(),new Promise(r=>setTimeout(r,1700))]);
+ gateState("home")};
+
+async function enterApp(){
  const {data:{session}}=await sb.auth.getSession();
- if(!session)return login();
+ if(!session)return showGate();
  S.user=session.user;
  const {data:p}=await sb.from("profiles").select("display_name,role").eq("id",S.user.id).single();
  S.role=p?.role||"player";
  $who.innerHTML=`<span>${esc(p?.display_name||S.user.email)} (${S.role === "dm" ? "DM" : "player"}) </span><button id="so">Sign out</button>`;
- document.getElementById("so").onclick=async()=>{await sb.auth.signOut();S.cur=null;login()};
+ document.getElementById("so").onclick=async()=>{await sb.auth.signOut();S.cur=null;showGate()};
  await load();party();initExtras();
  sb.channel("chars").on("postgres_changes",{event:"*",schema:"public",table:"characters"},pl=>{
   const r=pl.new;if(!r||!r.id)return;const i=S.chars.findIndex(c=>c.id===r.id);
   if(i>=0)S.chars[i]=r;else S.chars.push(r);
   if(S.cur===r.id&&S.tab==="core")drawLive()}).subscribe();
+}
+async function start(){
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session)return showGate();
+ await enterApp();
+ gateState("home");
 }
 async function load(){
  const {data,error}=await sb.from("characters").select("*").order("name");
